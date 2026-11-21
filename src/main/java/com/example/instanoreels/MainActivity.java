@@ -1,6 +1,7 @@
 package com.example.instanoreels;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
@@ -21,6 +22,11 @@ public class MainActivity extends Activity {
         + "var s=document.createElement('style');s.id='noreels-style';"
         + "s.innerHTML='a[href^=\"/reels\"],a[href^=\"/explore\"]{display:none!important}';"
         + "document.head.appendChild(s);}"
+        + "if(!document.getElementById('dark-style')){"
+        + "var d=document.createElement('style');d.id='dark-style';"
+        + "d.innerHTML='html{background:#fff;filter:invert(1) hue-rotate(180deg)}"
+        + "img,video,canvas,picture{filter:invert(1) hue-rotate(180deg)}';"
+        + "document.head.appendChild(d);}"
         + "if(!window.__noreels){window.__noreels=1;"
         + "setInterval(function(){var p=location.pathname;"
         + "if(p.indexOf('/reels')===0||p.indexOf('/explore')===0){location.href='/';}"
@@ -31,6 +37,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         web = new WebView(this);
+        web.setBackgroundColor(Color.BLACK);
         setContentView(web);
 
         WebSettings st = web.getSettings();
